@@ -61,12 +61,13 @@ class CalculatorViewController: UIViewController {
 
     let historyLabel: UILabel = {
         let historyLabel = UILabel()
-        historyLabel.text = "KAKA"
+//        historyLabel.text = "KAKA"
+        historyLabel.numberOfLines = 0
         historyLabel.translatesAutoresizingMaskIntoConstraints = false
         historyLabel.layer.cornerRadius = 45
         historyLabel.layer.masksToBounds = true
-        historyLabel.backgroundColor = .cyan
-        historyLabel.baselineAdjustment = .alignBaselines
+//        historyLabel.backgroundColor = .cyan
+//        historyLabel.baselineAdjustment = .alignBaselines
         historyLabel.textColor = .white
         return historyLabel
     }()
@@ -170,6 +171,9 @@ extension CalculatorViewController: PresenterToViewCalculatorProtocol{
         displayLabel.text = text
     }
 
+    func pushHistoryText(_ text: String) {
+        historyLabel.text = (historyLabel.text ?? "") + text
+    }
     func clearInput() {
         displayLabel.text = "0"
     }

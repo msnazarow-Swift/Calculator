@@ -19,9 +19,11 @@ let additions = ["AC", plusMinus, "%"]
 let plusMinus = "+⁄−"
 let comma = ","
 let dot = "."
+let multiply = "×"
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewCalculatorProtocol: AnyObject {
     func setDisplayText(_ text: String)
+    func pushHistoryText(_ text: String)
     func clearInput()
     func getResult() -> Double?
     func bibError()
