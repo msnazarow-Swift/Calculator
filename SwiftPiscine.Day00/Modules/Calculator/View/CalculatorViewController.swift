@@ -53,7 +53,8 @@ class CalculatorViewController: UIViewController {
         displayLabel.textColor = .white
         displayLabel.textAlignment = .right
         displayLabel.adjustsFontSizeToFitWidth = true
-        displayLabel.minimumScaleFactor = 0.7
+        displayLabel.minimumScaleFactor = 0.5
+        displayLabel.numberOfLines = 1
         displayLabel.font = .systemFont(ofSize: 80 * verticalTranslation)
         return displayLabel
     }()
@@ -154,8 +155,10 @@ class CalculatorViewController: UIViewController {
     @objc private func buttonDidTapped(button: UIButton){
         let color = button.backgroundColor
         button.backgroundColor = button.backgroundColor?.withAlphaComponent(0.5)
-        UIView.animate(withDuration: 0.5) {
-            button.backgroundColor = color
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5) {
+                button.backgroundColor = color
+            }
         }
         presenter?.buttonDidTapped(button.titleLabel?.text)
     }
@@ -163,4 +166,19 @@ class CalculatorViewController: UIViewController {
 
 extension CalculatorViewController: PresenterToViewCalculatorProtocol{
     // TODO: Implement View Output Methods
+    func setDisplayText(_ text: String) {
+        displayLabel.text = text
+    }
+
+    func clearInput() {
+        displayLabel.text = "0"
+    }
+    
+    func getResult() -> Double? {
+        return Double(displayLabel.text ?? "")
+    }
+
+    func bibError() {
+
+    }
 }

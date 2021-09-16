@@ -19,7 +19,10 @@ let additions = ["AC", "+⁄−", "%"]
 let comma = ","
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewCalculatorProtocol: AnyObject {
-   
+    func setDisplayText(_ text: String)
+    func clearInput()
+    func getResult() -> Double?
+    func bibError()
 }
 
 
