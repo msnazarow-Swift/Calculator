@@ -15,8 +15,10 @@ var verticalTranslation = UIApplication.shared.statusBarOrientation.isPortrait ?
 var horisontalTranslation = UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.width / 390.0 : UIScreen.main.bounds.width / 844.0
 let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 let operations = ["=", "×", "÷", "-", "+"]
-let additions = ["AC", "+⁄−", "%"]
+let additions = ["AC", plusMinus, "%"]
+let plusMinus = "+⁄−"
 let comma = ","
+let dot = "."
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewCalculatorProtocol: AnyObject {
     func setDisplayText(_ text: String)

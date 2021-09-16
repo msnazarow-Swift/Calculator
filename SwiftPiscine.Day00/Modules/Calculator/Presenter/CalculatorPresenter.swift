@@ -28,7 +28,9 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
         case typingSecondOperand
         case didCalculation
     }
+
     var status: Status = .waitForFirstOperand
+
     // MARK: Init
     init(view: PresenterToViewCalculatorProtocol, interactor: PresenterToInteractorCalculatorProtocol?, router: PresenterToRouterCalculatorProtocol?) {
         self.view = view
@@ -42,70 +44,106 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
         }
         switch buttonTitle {
         case "0"..."9":
-            switch status {
-            case .waitForFirstOperand, .didCalculation:
-                output = buttonTitle
-                view?.setDisplayText(buttonTitle)
-                status = .typingFirstOperand
-            case .typingFirstOperand, .typingSecondOperand:
-                output.append(buttonTitle)
-                view?.setDisplayText(output)
-            case .waitForSecondOperand:
-                output = buttonTitle
-                view?.setDisplayText(buttonTitle)
-                status = .typingSecondOperand
-            }
+            handleDigit(digit: buttonTitle)
         case "=":
-            if status == .typingSecondOperand {
-                if let operation = operation, let operand = Double(output),
-                   let result = calculate(result: result, operation: operation, operand: operand){
-                    self.result = result
-                    self.operand = operand
-                    pushResult(result: self.result)
-                    didCalculation = true
-                }
-                status = .didCalculation
-            } else if status == .didCalculation {
-                if let operation = operation, let operand = operand,
-                   let result = calculate(result: result, operation: operation, operand: operand){
-                    self.result = result
-                    pushResult(result: self.result)
-                    didCalculation = true
-                }
-            }
+            handleResult()
         case _ where operations.contains(buttonTitle):
-
-            didCalculation = true
-            switch status {
-            case .typingFirstOperand, .didCalculation:
-                if let result = Double(output) {
-                    self.result = result
-                }
-                operation = buttonTitle
-                status = .waitForSecondOperand
-            case .typingSecondOperand:
-                if buttonTitle == "=" || operation != nil {
-                    guard let operand = Double(output), let operation = operation,
-                          let result = calculate(result: result, operation: operation, operand: operand) else { break }
-                    self.operand = operand
-                    self.operation = buttonTitle
-                    pushResult(result: result)
-                    status = .waitForSecondOperand
-                }
-            default:
-                break
-            }
+            handleOperations(operationCharecter: buttonTitle)
         case "AC":
             status = .waitForFirstOperand
             output = "0"
             result = 0
             view?.clearInput()
         case ",":
-            if output.contains(",") {
+            if output.contains(".") && status != .didCalculation {
                 view?.bibError()
             } else {
-                output += ","
+                handleDigit(digit: ".")
                 view?.setDisplayText(output)
+            }
+        case "+⁄−":
+            if status == .waitForSecondOperand || status == .waitForFirstOperand{
+                handlePlusMinus()
+            } else {
+                handleDigit(digit: buttonTitle)
+            }
+        default:
+            break
+        }
+    }
+
+    private func handleDigit(digit: String) {
+        switch status {
+        case .waitForFirstOperand, .didCalculation:
+            switch digit {
+            case dot:
+                output = "0\(dot)"
+            case plusMinus:
+                handlePlusMinus()
+            default:
+                output = digit
+            }
+            view?.setDisplayText(output)
+            status = .typingFirstOperand
+        case .typingFirstOperand, .typingSecondOperand:
+            switch digit {
+            case plusMinus:
+                handlePlusMinus()
+            default:
+                output.append(digit)
+            }
+
+            view?.setDisplayText(output)
+        case .waitForSecondOperand:
+            switch digit {
+            case dot:
+                output = "0\(dot)"
+            case plusMinus:
+                handlePlusMinus()
+            default:
+                output = digit
+            }
+            view?.setDisplayText(output)
+            status = .typingSecondOperand
+        }
+    }
+
+    private func handleResult(){
+        if status == .typingSecondOperand {
+            if let operation = operation, let operand = Double(output),
+               let result = calculate(result: result, operation: operation, operand: operand){
+                self.result = result
+                self.operand = operand
+                pushResult(result: self.result)
+                didCalculation = true
+            }
+            status = .didCalculation
+        } else if status == .didCalculation {
+            if let operation = operation, let operand = operand,
+               let result = calculate(result: result, operation: operation, operand: operand){
+                self.result = result
+                pushResult(result: self.result)
+                didCalculation = true
+            }
+        }
+    }
+
+    private func handleOperations(operationCharecter: String){
+        switch status {
+        case .typingFirstOperand, .didCalculation:
+            if let result = Double(output) {
+                self.result = result
+            }
+            operation = operationCharecter
+            status = .waitForSecondOperand
+        case .typingSecondOperand:
+            if operationCharecter == "=" || operation != nil {
+                guard let operand = Double(output), let operation = operation,
+                      let result = calculate(result: result, operation: operation, operand: operand) else { break }
+                self.operand = operand
+                self.operation = operationCharecter
+                pushResult(result: result)
+                status = .waitForSecondOperand
             }
         default:
             break
@@ -124,6 +162,14 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
             return (result / operand)
         default:
             return nil
+        }
+    }
+
+    private func handlePlusMinus(){
+        if output.first == "-" {
+            output.removeFirst()
+        } else {
+            output.insert("-", at: output.startIndex)
         }
     }
 
