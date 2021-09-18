@@ -11,15 +11,11 @@ import UIKit
 
 // MARK: Globals
 
-var verticalTranslation = UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.height / 844.0 : UIScreen.main.bounds.height / 390.0
-var horisontalTranslation = UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.width / 390.0 : UIScreen.main.bounds.width / 844.0
-let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-let operations = ["=", "×", "÷", "-", "+"]
-let additions = ["AC", plusMinus, "%"]
-let plusMinus = "+⁄−"
-let comma = ","
-let dot = "."
-let multiply = "×"
+var verticalTranslation = CGFloat(1) //UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.height / 844.0 : UIScreen.main.bounds.height / 390.0
+var horisontalTranslation = CGFloat(1) //UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.width / 390.0 : UIScreen.main.bounds.width / 844.0
+let operations = ["=", .multiply, .divide, "-", "+"]
+let additions = ["AC", .plusMinus, "%"]
+
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewCalculatorProtocol: AnyObject {
     func setDisplayText(_ text: String)

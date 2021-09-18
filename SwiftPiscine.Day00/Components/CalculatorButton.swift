@@ -81,7 +81,7 @@ class CalculatorButton: UIButton {
     }
 
     static func generateButton(for key: String) -> CalculatorButton {
-        if digits.contains(key) || key == comma {
+        if ("0"..."9").contains(key) || key == .comma {
             let button = DigitButton()
             button.setTitle(key, for: .normal)
             return button

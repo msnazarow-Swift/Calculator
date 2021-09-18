@@ -75,7 +75,7 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
                 self.result = result
                 status = .didCalculation
                 operand = 0.01
-                operation = multiply
+                operation = .multiply
                 handleResult()
             case .typingSecondOperand:
                 handleOperations(operationCharecter: "")
@@ -83,7 +83,7 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
                 self.result = result
                 status = .didCalculation
                 operand = 0.01
-                operation = multiply
+                operation = .multiply
                 handleResult()
             default:
                 break
@@ -97,9 +97,9 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
         switch status {
         case .waitForFirstOperand, .didCalculation:
             switch digit {
-            case dot:
-                output = "0\(dot)"
-            case plusMinus:
+            case .dot:
+                output = "0\(digit)"
+            case .plusMinus:
                 handlePlusMinus()
             default:
                 output = digit
@@ -108,7 +108,7 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
             status = .typingFirstOperand
         case .typingFirstOperand, .typingSecondOperand:
             switch digit {
-            case plusMinus:
+            case .plusMinus:
                 handlePlusMinus()
             default:
                 output.append(digit)
@@ -117,9 +117,9 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
             view?.setDisplayText(output)
         case .waitForSecondOperand:
             switch digit {
-            case dot:
-                output = "0\(dot)"
-            case plusMinus:
+            case .dot:
+                output = "0\(digit)"
+            case .plusMinus:
                 handlePlusMinus()
             default:
                 output = digit

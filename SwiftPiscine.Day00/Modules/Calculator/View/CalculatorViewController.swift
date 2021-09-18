@@ -38,7 +38,7 @@ class CalculatorViewController: UIViewController {
             horisontalStack.spacing =  gap
             horisontalStack.distribution = .fillEqually
             return horisontalStack
-            }()
+        }()
         })
         grid.axis = .vertical
         grid.alignment = .fill
@@ -61,13 +61,13 @@ class CalculatorViewController: UIViewController {
 
     let historyLabel: UILabel = {
         let historyLabel = UILabel()
-//        historyLabel.text = "KAKA"
+        //        historyLabel.text = "KAKA"
         historyLabel.numberOfLines = 0
         historyLabel.translatesAutoresizingMaskIntoConstraints = false
         historyLabel.layer.cornerRadius = 45
         historyLabel.layer.masksToBounds = true
-//        historyLabel.backgroundColor = .cyan
-//        historyLabel.baselineAdjustment = .alignBaselines
+        //        historyLabel.backgroundColor = .cyan
+        //        historyLabel.baselineAdjustment = .alignBaselines
         historyLabel.textColor = .white
         return historyLabel
     }()
@@ -125,7 +125,7 @@ class CalculatorViewController: UIViewController {
             historyLabel.isHidden = true
         } else {
             NSLayoutConstraint.activate([
-    //            historyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: gap),
+                //            historyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: gap),
                 historyLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: gap),
                 historyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -gap),
                 historyLabel.trailingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: -gap),
@@ -138,12 +138,17 @@ class CalculatorViewController: UIViewController {
     }
 
     private func setupConstraints() {
-
-        if (view.frame.width / view.frame.height < 4.0 / 6.0) {
-            optionalConstraint = mainView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant:  -2 * gap)
+        if UIApplication.shared.statusBarOrientation.isLandscape {
+            optionalConstraint = mainView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 4.0 / 6.0, constant: -gap)
         } else {
-            optionalConstraint = mainView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, constant:  -2 * gap)
+            if (view.frame.width / view.frame.height < 4.0 / 6.0) {
+                optionalConstraint = mainView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant:  -2 * gap)
+            } else {
+                optionalConstraint = mainView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, constant:  -2 * gap)
+            }
         }
+
+        //TODO не работает в landscape
         NSLayoutConstraint.activate([
             mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -gap),
             mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant:  -0.5 * gap),
