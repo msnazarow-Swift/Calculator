@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E24978026EF427F00FACCB5"
-               BuildableName = "SwiftPiscine.Day00.app"
-               BlueprintName = "SwiftPiscine.Day00"
-               ReferencedContainer = "container:SwiftPiscine.Day00.xcodeproj">
+               BuildableName = "Calculator.app"
+               BlueprintName = "Calculator"
+               ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E24978026EF427F00FACCB5"
-            BuildableName = "SwiftPiscine.Day00.app"
-            BlueprintName = "SwiftPiscine.Day00"
-            ReferencedContainer = "container:SwiftPiscine.Day00.xcodeproj">
+            BuildableName = "Calculator.app"
+            BlueprintName = "Calculator"
+            ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E24978026EF427F00FACCB5"
-            BuildableName = "SwiftPiscine.Day00.app"
-            BlueprintName = "SwiftPiscine.Day00"
-            ReferencedContainer = "container:SwiftPiscine.Day00.xcodeproj">
+            BuildableName = "Calculator.app"
+            BlueprintName = "Calculator"
+            ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

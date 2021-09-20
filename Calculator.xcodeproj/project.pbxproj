@@ -28,7 +28,7 @@
 		3E1A069126EF5BED00862A13 /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		3E1A069326EF5BED00862A13 /* CalculatorInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorInteractor.swift; sourceTree = "<group>"; };
 		3E1A069526EF5BED00862A13 /* CalculatorContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorContract.swift; sourceTree = "<group>"; };
-		3E24978126EF427F00FACCB5 /* SwiftPiscine.Day00.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPiscine.Day00.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E24978126EF427F00FACCB5 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E24978426EF427F00FACCB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E24978D26EF428100FACCB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E24979026EF428100FACCB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		3E24977826EF427F00FACCB5 = {
 			isa = PBXGroup;
 			children = (
-				3E24978326EF427F00FACCB5 /* SwiftPiscine.Day00 */,
+				3E24978326EF427F00FACCB5 /* Calculator */,
 				3E24978226EF427F00FACCB5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,12 +108,12 @@
 		3E24978226EF427F00FACCB5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E24978126EF427F00FACCB5 /* SwiftPiscine.Day00.app */,
+				3E24978126EF427F00FACCB5 /* Calculator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3E24978326EF427F00FACCB5 /* SwiftPiscine.Day00 */ = {
+		3E24978326EF427F00FACCB5 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
 				3E8861C826F389EE005D86CB /* Extentions */,
@@ -124,7 +124,7 @@
 				3E24978F26EF428100FACCB5 /* LaunchScreen.storyboard */,
 				3E24979226EF428100FACCB5 /* Info.plist */,
 			);
-			path = SwiftPiscine.Day00;
+			path = Calculator;
 			sourceTree = "<group>";
 		};
 		3E24979B26EF465500FACCB5 /* Modules */ = {
@@ -168,9 +168,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3E24978026EF427F00FACCB5 /* SwiftPiscine.Day00 */ = {
+		3E24978026EF427F00FACCB5 /* Calculator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E24979526EF428100FACCB5 /* Build configuration list for PBXNativeTarget "SwiftPiscine.Day00" */;
+			buildConfigurationList = 3E24979526EF428100FACCB5 /* Build configuration list for PBXNativeTarget "Calculator" */;
 			buildPhases = (
 				3E24977D26EF427F00FACCB5 /* Sources */,
 				3E24977E26EF427F00FACCB5 /* Frameworks */,
@@ -180,9 +180,9 @@
 			);
 			dependencies = (
 			);
-			name = SwiftPiscine.Day00;
-			productName = SwiftPiscine.Day00;
-			productReference = 3E24978126EF427F00FACCB5 /* SwiftPiscine.Day00.app */;
+			name = Calculator;
+			productName = Calculator;
+			productReference = 3E24978126EF427F00FACCB5 /* Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3E24977C26EF427F00FACCB5 /* Build configuration list for PBXProject "SwiftPiscine.Day00" */;
+			buildConfigurationList = 3E24977C26EF427F00FACCB5 /* Build configuration list for PBXProject "Calculator" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -212,7 +212,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E24978026EF427F00FACCB5 /* SwiftPiscine.Day00 */,
+				3E24978026EF427F00FACCB5 /* Calculator */,
 			);
 		};
 /* End PBXProject section */
@@ -384,7 +384,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L63NHFJ3AD;
-				INFOPLIST_FILE = SwiftPiscine.Day00/Info.plist;
+				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -404,7 +404,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L63NHFJ3AD;
-				INFOPLIST_FILE = SwiftPiscine.Day00/Info.plist;
+				INFOPLIST_FILE = Calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -420,7 +420,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E24977C26EF427F00FACCB5 /* Build configuration list for PBXProject "SwiftPiscine.Day00" */ = {
+		3E24977C26EF427F00FACCB5 /* Build configuration list for PBXProject "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E24979326EF428100FACCB5 /* Debug */,
@@ -429,7 +429,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E24979526EF428100FACCB5 /* Build configuration list for PBXNativeTarget "SwiftPiscine.Day00" */ = {
+		3E24979526EF428100FACCB5 /* Build configuration list for PBXNativeTarget "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E24979626EF428100FACCB5 /* Debug */,
