@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
 
     var presenter: ViewToPresenterCalculatorProtocol?
 
-    lazy var gap =  view.frame.width / 20
+    lazy var gap = view.frame.height / 50
 
     var buttonNames = [
         ["AC", "+⁄−", "%", "÷"],
@@ -55,19 +55,16 @@ class CalculatorViewController: UIViewController {
         displayLabel.adjustsFontSizeToFitWidth = true
         displayLabel.minimumScaleFactor = 0.5
         displayLabel.numberOfLines = 1
-        displayLabel.font = .systemFont(ofSize: 80 * verticalTranslation)
+        displayLabel.font = .systemFont(ofSize: (UIApplication.shared.statusBarOrientation.isPortrait ? 80 : 50) * verticalTranslation)
         return displayLabel
     }()
 
     let historyLabel: UILabel = {
         let historyLabel = UILabel()
-        //        historyLabel.text = "KAKA"
         historyLabel.numberOfLines = 0
         historyLabel.translatesAutoresizingMaskIntoConstraints = false
         historyLabel.layer.cornerRadius = 45
         historyLabel.layer.masksToBounds = true
-        //        historyLabel.backgroundColor = .cyan
-        //        historyLabel.baselineAdjustment = .alignBaselines
         historyLabel.textColor = .white
         return historyLabel
     }()
@@ -92,7 +89,7 @@ class CalculatorViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         optionalConstraint.isActive = false
-
+//        NSLayoutConstraint.deactivate(historyLabel.constraints)
         if UIDevice.current.orientation.isLandscape {
             displayLabel.font = .systemFont(ofSize: 50 * verticalTranslation)
             historyLabel.isHidden = false
@@ -101,6 +98,7 @@ class CalculatorViewController: UIViewController {
         } else {
             displayLabel.font = .systemFont(ofSize: 80 * verticalTranslation)
             historyLabel.isHidden = true
+//            NSLayoutConstraint.deactivate(historyLabel.constraints)
             if (view.bounds.height / view.bounds.width < 4.0 / 6.0) {
                 optionalConstraint = mainView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant:  -2 * gap)
             } else {
@@ -108,12 +106,14 @@ class CalculatorViewController: UIViewController {
             }
         }
         optionalConstraint.isActive = true
-        NSLayoutConstraint.activate([
+        let constraints = [
             historyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             historyLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: gap),
             historyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -gap),
             historyLabel.trailingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: -gap),
-        ])
+        ]
+        constraints.forEach{$0.priority = UILayoutPriority(rawValue: 999)}
+        NSLayoutConstraint.activate(constraints)
 
     }
     // MARK: - SetupUI Methods
@@ -121,15 +121,17 @@ class CalculatorViewController: UIViewController {
     private func setupUI() {
         view.addSubview(mainView)
         view.addSubview(historyLabel)
+        let historyLabelLeftConstraint = historyLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: gap)
+        historyLabelLeftConstraint.priority = UILayoutPriority(rawValue: 998)
         if UIApplication.shared.statusBarOrientation.isPortrait {
             historyLabel.isHidden = true
         } else {
             NSLayoutConstraint.activate([
-                //            historyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: gap),
                 historyLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: gap),
                 historyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -gap),
                 historyLabel.trailingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: -gap),
-                historyLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -view.frame.width + 2 * gap)
+//                historyLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -mainView.frame.width - 2 * gap)
+                historyLabelLeftConstraint
             ])
         }
         buttons[17].backgroundColor = .clear

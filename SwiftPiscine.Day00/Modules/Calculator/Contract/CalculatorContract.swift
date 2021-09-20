@@ -11,8 +11,8 @@ import UIKit
 
 // MARK: Globals
 
-var verticalTranslation = CGFloat(1) //UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.height / 844.0 : UIScreen.main.bounds.height / 390.0
-var horisontalTranslation = CGFloat(1) //UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.width / 390.0 : UIScreen.main.bounds.width / 844.0
+var verticalTranslation = UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.height / 844.0 : UIScreen.main.bounds.height / 390.0
+var horisontalTranslation = UIApplication.shared.statusBarOrientation.isPortrait ? UIScreen.main.bounds.width / 390.0 : UIScreen.main.bounds.width / 844.0
 let operations = ["=", .multiply, .divide, "-", "+"]
 let additions = ["AC", .plusMinus, "%"]
 
