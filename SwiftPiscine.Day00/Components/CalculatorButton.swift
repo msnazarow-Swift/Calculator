@@ -27,6 +27,11 @@ class OpeationButton: CalculatorButton {
             titleLabel?.font = .boldSystemFont(ofSize: 40 * verticalTranslation)
         }
     }
+    override var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? backgroundColor?.modified(withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: 0.2) : backgroundColor?.modified(withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: -0.2)
+        }
+    }
 }
 
 class DigitButton: CalculatorButton {
@@ -69,7 +74,6 @@ class CalculatorButton: UIButton {
         titleLabel?.font = .systemFont(ofSize: 40 * verticalTranslation)
         backgroundColor = .darkGray
         clipsToBounds = true
-        //        widthAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -79,7 +83,11 @@ class CalculatorButton: UIButton {
         super.layoutSubviews()
         layer.cornerRadius = 0.5 * bounds.size.width
     }
-
+    override var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? backgroundColor?.modified(withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: 0.3) : backgroundColor?.modified(withAdditionalHue: 0, additionalSaturation: 0, additionalBrightness: -0.3)
+        }
+    }
     static func generateButton(for key: String) -> CalculatorButton {
         if ("0"..."9").contains(key) || key == .comma {
             let button = DigitButton()

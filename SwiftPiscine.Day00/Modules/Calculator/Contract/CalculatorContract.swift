@@ -23,6 +23,8 @@ protocol PresenterToViewCalculatorProtocol: AnyObject {
     func clearInput()
     func getResult() -> Double?
     func bibError()
+    func switchACButtonTitle(to title: String)
+    func clearHistory()
 }
 
 

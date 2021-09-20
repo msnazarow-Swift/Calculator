@@ -42,6 +42,9 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
         guard let buttonTitle = buttonTitle else {
             return
         }
+        if(buttonTitle == "AC") {
+            view?.clearHistory()
+        }
         switch buttonTitle {
         case "0"..."9":
             handleDigit(digit: buttonTitle)
@@ -49,11 +52,12 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
             handleResult()
         case _ where operations.contains(buttonTitle):
             handleOperations(operationCharecter: buttonTitle)
-        case "AC":
+        case "AC", "C":
             status = .waitForFirstOperand
             output = "0"
             result = 0
             view?.clearInput()
+            view?.switchACButtonTitle(to: "AC")
         case ",":
             if output.contains(".") && status != .didCalculation {
                 view?.bibError()
@@ -94,6 +98,7 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
     }
 
     private func handleDigit(digit: String) {
+        view?.switchACButtonTitle(to: "C")
         switch status {
         case .waitForFirstOperand, .didCalculation:
             switch digit {
@@ -111,7 +116,9 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
             case .plusMinus:
                 handlePlusMinus()
             default:
-                output.append(digit)
+                if output.count < 14 {
+                    output.append(digit)
+                }
             }
 
             view?.setDisplayText(output)
@@ -144,7 +151,7 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
             if let operation = operation, let operand = operand,
                let result = calculate(result: result, operation: operation, operand: operand){
                 self.result = result
-                view?.pushHistoryText(historyText + " \(operation) \(output) = \(String(format: "%g", result))\n")
+                view?.pushHistoryText(historyText + " \(operation) \(String(format: "%g", operand)) = \(String(format: "%g", result))\n")
                 historyText = String(format: "%g", result)
                 pushResult(result: self.result)
             }
@@ -200,12 +207,8 @@ class CalculatorPresenter: ViewToPresenterCalculatorProtocol {
     }
 
     private func pushResult(result: Double) {
-
-//        view?.pushHistoryText("\(self.result) \(operation ?? "") = \(result)")
-
         self.result = result
         output = String(format: "%g", result)
-
         view?.setDisplayText(output)
     }
 }

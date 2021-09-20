@@ -63,7 +63,6 @@ class CalculatorViewController: UIViewController {
         let historyLabel = UILabel()
         historyLabel.numberOfLines = 0
         historyLabel.translatesAutoresizingMaskIntoConstraints = false
-        historyLabel.layer.cornerRadius = 45
         historyLabel.layer.masksToBounds = true
         historyLabel.textColor = .white
         return historyLabel
@@ -121,7 +120,7 @@ class CalculatorViewController: UIViewController {
     private func setupUI() {
         view.addSubview(mainView)
         view.addSubview(historyLabel)
-        let historyLabelLeftConstraint = historyLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: gap)
+        let historyLabelLeftConstraint = historyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: gap)
         historyLabelLeftConstraint.priority = UILayoutPriority(rawValue: 998)
         if UIApplication.shared.statusBarOrientation.isPortrait {
             historyLabel.isHidden = true
@@ -161,13 +160,6 @@ class CalculatorViewController: UIViewController {
     }
 
     @objc private func buttonDidTapped(button: UIButton){
-        let color = button.backgroundColor
-        button.backgroundColor = button.backgroundColor?.withAlphaComponent(0.5)
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5) {
-                button.backgroundColor = color
-            }
-        }
         presenter?.buttonDidTapped(button.titleLabel?.text)
     }
 }
@@ -191,5 +183,13 @@ extension CalculatorViewController: PresenterToViewCalculatorProtocol{
 
     func bibError() {
 
+    }
+
+    func switchACButtonTitle(to title: String){
+        buttons[0].setTitle(title, for: .normal)
+    }
+
+    func clearHistory() {
+        historyLabel.text = ""
     }
 }
